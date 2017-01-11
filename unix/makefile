@@ -257,6 +257,4 @@ profile/%.o: debug/%.cpp
 debug/txt2cpp: ../src/txt2cpp.cpp
 	$(CXX) $(LDFLAGS) ../src/txt2cpp.cpp -o debug/txt2cpp
 
-# $(CXX) debug/txt2cpp.o -o debug/txt2cpp
-
 .PHONY: help all
