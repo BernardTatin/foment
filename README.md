@@ -1,3 +1,17 @@
+# about this fork
+The only file which is modified is the _unix/makefile_. Usage is :
+
+```bash
+make [compiler=gnu|intel|sun] [debug=yes|no] [all|]install|clean]
+default values :
+  compiler: gnu
+  debug   : yes
+```
+Sun compiler is a work in progress.
+
+Without debug (option _debug=no_), Intel compiler is really faster than _gcc_.
+
+# original README
 [Foment](https://github.com/leftmike/foment/wiki/Foment) is an implementation of Scheme.
 
 * Full R7RS.
