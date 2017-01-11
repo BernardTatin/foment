@@ -1,0 +1,9 @@
+# IDE
+.*.swp
+*~
+
+*.log
+
+debug/
+release/
+profile/

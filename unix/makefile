@@ -9,12 +9,54 @@ CCDEBUG = -c -ggdb -Wall -DFOMENT_DEBUG -DFOMENT_UNIX
 CCRELEASE = -c -Wall -DFOMENT_UNIX
 CCPROFILE = -pg $(CCRELEASE)
 
+## note :
+##		for intel compilers, don't forget to export these variables
+##		before runing make
+##			export PATH=/opt/intel/bin:$PATH
+##			export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/lib/intel64_lin
+
+ifndef $(compiler)
+compiler = gnu
+endif
+
+ifeq ($(compiler),gnu)
+CC = gcc
+CXX = g++
+CFLAGS =
+CXXFLAGS =
+LDFLAGS =
+else ifeq ($(compiler),intel)
+CC = icc
+CXX = icpc
+CFLAGS = -m64
+CXXFLAGS = -m64
+LDFLAGS = -m64
+else ifeq ($(compiler),sun)
+CC = cc
+CXX = cc
+CFLAGS = -m64
+CXXFLAGS = -m64
+LDFLAGS = -m64
+endif
+
+help:
+	@echo "$(MAKE) [compiler=gnu|intel|sun] [debug=yes|no] [all|]install|clean]"
+	@echo "default values :"
+	@echo "  compiler: gnu"
+	@echo "  debug   : yes"
+
+
 all: debug release debug/foment release/foment
 
 prof: profile profile/foment
 
 install: all
-	sudo cp debug/foment /usr/local/bin
+ifeq ($(debug),yes)
+	cp debug/foment ~/bin
+else
+	cp release/foment ~/bin
+endif
+
 
 clean: debug release profile
 	-rm debug/*
@@ -67,7 +109,7 @@ debug/foment: debug/foment.o debug/gc.o debug/syncthrd.o debug/compile.o debug/i
 		debug/library.o debug/execute.o debug/numbers.o	debug/mini-gmp.o debug/write.o\
 		debug/read.o debug/filesys.o debug/compare.o debug/main.o debug/hashtbl.o\
 		debug/bignums.o debug/base.o
-	g++ -o debug/foment $^ -lpthread
+	$(CXX) -o debug/foment $^ -lpthread
 
 release/foment: release/foment.o release/gc.o release/syncthrd.o release/compile.o release/io.o\
 		release/synrules.o release/synpass.o release/midpass.o release/genpass.o\
@@ -75,7 +117,7 @@ release/foment: release/foment.o release/gc.o release/syncthrd.o release/compile
 		release/vectors.o release/library.o release/execute.o release/numbers.o\
 		release/mini-gmp.o release/write.o release/read.o release/filesys.o\
 		release/compare.o release/main.o release/hashtbl.o release/bignums.o release/base.o
-	g++ -o release/foment $^ -lpthread
+	$(CXX) -o release/foment $^ -lpthread
 
 profile/foment: profile/foment.o profile/gc.o profile/syncthrd.o profile/compile.o profile/io.o\
 		profile/synrules.o profile/synpass.o profile/midpass.o profile/genpass.o\
@@ -83,7 +125,7 @@ profile/foment: profile/foment.o profile/gc.o profile/syncthrd.o profile/compile
 		profile/vectors.o profile/library.o profile/execute.o profile/numbers.o\
 		profile/mini-gmp.o profile/write.o profile/read.o profile/filesys.o\
 		profile/compare.o profile/main.o profile/hashtbl.o profile/bignums.o profile/base.o
-	g++ -pg -o profile/foment $^ -lpthread
+	$(CXX) -pg -o profile/foment $^ -lpthread
 
 debug/foment.o: ../src/foment.cpp ../src/foment.hpp ../src/syncthrd.hpp ../src/unicode.hpp
 debug/gc.o: ../src/gc.cpp ../src/foment.hpp ../src/syncthrd.hpp ../src/io.hpp
@@ -146,41 +188,43 @@ release/main.o: ../src/main.cpp ../src/foment.hpp
 release/base.o: debug/base.cpp
 
 debug/%.o: %.cpp
-	cc $(CCDEBUG) -I ../src -o $@ $<
+	$(CC) $(CCDEBUG) -I ../src -o $@ $<
 
 debug/%.o: ../src/%.cpp
-	cc $(CCDEBUG) -I ../src -o $@ $<
+	$(CC) $(CCDEBUG) -I ../src -o $@ $<
 
 debug/%.o: ../src/%.c
-	cc $(CCDEBUG) -I ../src -o $@ $<
+	$(CC) $(CCDEBUG) -I ../src -o $@ $<
 
 debug/%.o: debug/%.cpp
-	cc $(CCDEBUG) -I ../src -o $@ $<
+	$(CC) $(CCDEBUG) -I ../src -o $@ $<
 
 release/%.o: %.cpp
-	cc $(CCRELEASE) -I ../src -o $@ $<
+	$(CC) $(CCRELEASE) -I ../src -o $@ $<
 
 release/%.o: ../src/%.cpp
-	cc $(CCRELEASE) -I ../src -o $@ $<
+	$(CC) $(CCRELEASE) -I ../src -o $@ $<
 
 release/%.o: ../src/%.c
-	cc $(CCRELEASE) -I ../src -o $@ $<
+	$(CC) $(CCRELEASE) -I ../src -o $@ $<
 
 release/%.o: debug/%.cpp
-	cc $(CCRELEASE) -I ../src -o $@ $<
+	$(CC) $(CCRELEASE) -I ../src -o $@ $<
 
 profile/%.o: %.cpp
-	cc $(CCPROFILE) -I ../src -o $@ $<
+	$(CC) $(CCPROFILE) -I ../src -o $@ $<
 
 profile/%.o: ../src/%.cpp
-	cc $(CCPROFILE) -I ../src -o $@ $<
+	$(CC) $(CCPROFILE) -I ../src -o $@ $<
 
 profile/%.o: ../src/%.c
-	cc $(CCPROFILE) -I ../src -o $@ $<
+	$(CC) $(CCPROFILE) -I ../src -o $@ $<
 
 profile/%.o: debug/%.cpp
-	cc $(CCPROFILE) -I ../src -o $@ $<
+	$(CC) $(CCPROFILE) -I ../src -o $@ $<
 
 debug/txt2cpp: ../src/txt2cpp.cpp
-	g++ $(CCDEBUG) ../src/txt2cpp.cpp -o debug/txt2cpp.o
-	g++ debug/txt2cpp.o -o debug/txt2cpp
+	$(CXX) $(CCDEBUG) ../src/txt2cpp.cpp -o debug/txt2cpp.o
+	$(CXX) debug/txt2cpp.o -o debug/txt2cpp
+
+.PHONY: help all
