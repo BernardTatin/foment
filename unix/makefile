@@ -122,6 +122,9 @@ stress-test: all
 chibi-test: all
 	cd ../test ; ../unix/$(TEST_BUILD)/foment $(TEST_OPTIONS) r7rs-tests.scm
 
+read-bytevector-test: all
+	cd ../test ; ../unix/$(TEST_BUILD)/foment $(TEST_OPTIONS) byte-read.scm
+
 debug:
 	-mkdir debug
 
@@ -256,7 +259,5 @@ profile/%.o: debug/%.cpp
 
 debug/txt2cpp: ../src/txt2cpp.cpp
 	$(CXX) $(LDFLAGS) ../src/txt2cpp.cpp -o debug/txt2cpp
-
-# $(CXX) debug/txt2cpp.o -o debug/txt2cpp
 
 .PHONY: help all
