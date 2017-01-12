@@ -17,6 +17,7 @@
 				((rb-test expected-len bytes-to-read)
 				 (test expected-len  ;; "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 					   (let ((handle (open-binary-input-file "input.txt")))
+						 (display "\n\n=================================\n")
 						 (let ((buffer (read-bytevector bytes-to-read handle)))
 						   (close-input-port handle)
 						   (display "<") (display buffer) (display ">\n")
