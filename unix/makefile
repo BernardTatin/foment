@@ -122,6 +122,9 @@ stress-test: all
 chibi-test: all
 	cd ../test ; ../unix/$(TEST_BUILD)/foment $(TEST_OPTIONS) r7rs-tests.scm
 
+read-bytevector-test: all
+	cd ../test ; ../unix/$(TEST_BUILD)/foment $(TEST_OPTIONS) byte-read.scm
+
 debug:
 	-mkdir debug
 
