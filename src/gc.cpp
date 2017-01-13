@@ -30,6 +30,8 @@ Foment
 #include "syncthrd.hpp"
 #include "io.hpp"
 
+#include "more-is-not-better.hpp"
+
 #define GC_PAGE_SIZE 4096
 
 #define OBJECT_ALIGNMENT 8
@@ -1501,9 +1503,11 @@ static void Collect()
     FAssert(KeyEphemeronMap == 0);
 
     KeyEphemeronMapSize = LiveEphemerons;
-    KeyEphemeronMap = (FEphemeron **) malloc(sizeof(FEphemeron *) * KeyEphemeronMapSize);
+    KeyEphemeronMap = (FEphemeron **) MALLOC(sizeof(FEphemeron *) * KeyEphemeronMapSize);
+#if !defined(_with_calloc)
     if (KeyEphemeronMap != 0)
         memset(KeyEphemeronMap, 0, sizeof(FEphemeron *) * KeyEphemeronMapSize);
+#endif
     LiveEphemerons = 0;
 
     for (ulong_t rdx = 0; rdx < RootsUsed; rdx++)
@@ -1727,7 +1731,7 @@ void InstallGuardian(FObject obj, FObject tconc)
         FAssert(PairP(First(tconc)));
         FAssert(PairP(Rest(tconc)));
 
-        FGuardian * grd = (FGuardian *) malloc(sizeof(FGuardian));
+        FGuardian * grd = (FGuardian *) MALLOC(sizeof(FGuardian));
         if (grd == 0)
             RaiseExceptionC(Assertion, "install-guardian", "out of memory", EmptyListObject);
 
@@ -1753,7 +1757,7 @@ void InstallTracker(FObject obj, FObject ret, FObject tconc)
             FAssert(PairP(First(tconc)));
             FAssert(PairP(Rest(tconc)));
 
-            FTracker * trkr = (FTracker *) malloc(sizeof(FTracker));
+            FTracker * trkr = (FTracker *) MALLOC(sizeof(FTracker));
 
             if (trkr == 0)
                 RaiseExceptionC(Assertion, "install-tracker", "out of memory", EmptyListObject);

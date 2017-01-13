@@ -18,6 +18,7 @@
         <in>main.cpp</in>
         <in>midpass.cpp</in>
         <in>mini-gmp.c</in>
+        <in>more-is-not-better.hpp</in>
         <in>numbers.cpp</in>
         <in>pairs.cpp</in>
         <in>read.cpp</in>
@@ -272,6 +273,8 @@
       <item path="src/mini-gmp.c" ex="false" tool="0" flavor2="10">
         <cTool flags="0">
         </cTool>
+      </item>
+      <item path="src/more-is-not-better.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/numbers.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="2">
@@ -628,6 +631,8 @@
         <cTool flags="0">
         </cTool>
       </item>
+      <item path="src/more-is-not-better.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/numbers.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="2">
           <incDir>
@@ -966,6 +971,8 @@
       <item path="src/mini-gmp.c" ex="false" tool="0" flavor2="10">
         <cTool flags="1">
         </cTool>
+      </item>
+      <item path="src/more-is-not-better.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/numbers.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">

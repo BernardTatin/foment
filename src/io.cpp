@@ -50,6 +50,8 @@ typedef long_t SOCKET;
 #define addrinfoW addrinfo
 #endif // FOMENT_UNIX
 
+#include "more-is-not-better.hpp"
+
 #define NOT_PEEKED ((ulong_t) (-1))
 #define CR 13
 #define LF 10
@@ -386,7 +388,7 @@ static FObject MakeBufferedPort(FObject port)
     if (AsGenericPort(port)->Flags & PORT_FLAG_BUFFERED)
         return(port);
 
-    FBufferedContext * bc = (FBufferedContext *) malloc(sizeof(FBufferedContext));
+    FBufferedContext * bc = (FBufferedContext *) MALLOC(sizeof(FBufferedContext));
     if (bc == 0)
         return(NoValueObject);
 
@@ -395,7 +397,7 @@ static FObject MakeBufferedPort(FObject port)
     bc->Used = 0;
     bc->Maximum = 1024;
 
-    bc->Buffer = (unsigned char *) malloc(bc->Maximum);
+    bc->Buffer = (unsigned char *) MALLOC(bc->Maximum);
     if (bc->Buffer == 0)
     {
         free(bc);
@@ -1707,7 +1709,7 @@ static void ResetConsoleInput(FConsoleInput * ci)
 
 static FConsoleInput * MakeConsoleInput()
 {
-    FConsoleInput * ci = (FConsoleInput *) malloc(sizeof(FConsoleInput));
+    FConsoleInput * ci = (FConsoleInput *) MALLOC(sizeof(FConsoleInput));
     if (ci == 0)
         return(0);
 
@@ -1749,7 +1751,7 @@ static long_t PreviousHistory(long_t hdx)
 
 static void ConAddHistory(FConsoleInput * ci, FConCh * b, long_t bl)
 {
-    FConCh * s = (FConCh *) malloc(sizeof(FConCh) * bl);
+    FConCh * s = (FConCh *) MALLOC(sizeof(FConCh) * bl);
     if (s != 0)
     {
         memcpy(s, b, bl * sizeof(FConCh));
@@ -3359,7 +3361,7 @@ Define("recv-socket", ReceiveSocketPrimitive)(long_t argc, FObject argv[])
         ptr = b;
     else
     {
-        ptr = (char *) malloc(bvl);
+        ptr = (char *) MALLOC(bvl);
         if (ptr == 0)
             RaiseExceptionC(Restriction, "recv-socket", "insufficient memory",
                     List(argv[0]));
@@ -3392,7 +3394,7 @@ Define("get-ip-addresses", GetIpAddressesPrimitive)(long_t argc, FObject argv[])
 
     for (;;)
     {
-        iaabuf = (IP_ADAPTER_ADDRESSES *) malloc(sz);
+        iaabuf = (IP_ADAPTER_ADDRESSES *) MALLOC(sz);
         if (iaabuf == 0)
             RaiseExceptionC(Assertion, "get-ip-addresses", "unable to allocate memory",
                     EmptyListObject);

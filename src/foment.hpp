@@ -302,16 +302,10 @@ public:
 // Allocated size of the object in bytes, not including the ObjHdr and ObjFtr.
 inline ulong_t FObjHdr::ObjectSize()
 {
-#if 1
 	static const ulong_t sizeof_FObjHdr = sizeof(struct _FObjHdr);
 	const ulong_t all_bytes = BlockSize() * BlockCount() * sizeof_FObjHdr;
 	FAssert(all_bytes > 0);
 	return all_bytes;
-#else
-    FAssert(BlockSize() * BlockCount() > 0);
-
-    return(BlockSize() * BlockCount() * sizeof(struct _FObjHdr));
-#endif
 }
 
 // Number of FObjects which must be at the beginning of the object.

@@ -5,10 +5,13 @@
 TEST_OPTIONS = --check-heap
 TEST_BUILD = debug
 
+os = $(shell uname)
+
 debug ?= yes
 compiler ?= gnu
 
 
+DEFINES += -D_with_calloc
 DEFINES = -DFOMENT_UNIX
 ifeq ($(debug),yes)
 DEFINES += -DFOMENT_DEBUG

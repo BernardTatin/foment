@@ -20,6 +20,7 @@ Foment
 #include "syncthrd.hpp"
 #include "io.hpp"
 #include "unicode.hpp"
+#include "more-is-not-better.hpp"
 
 #define MAXIMUM_IDENTIFIER 256
 #define MAXIMUM_NUMBER 256
@@ -199,7 +200,7 @@ Again:
         sl += 1;
         if (sl == msl)
         {
-            FCh * ns = (FCh *) malloc(msl * 2 * sizeof(FCh));
+            FCh * ns = (FCh *) MALLOC(msl * 2 * sizeof(FCh));
             if (ns == 0)
             {
                 if (s != sb)
@@ -937,7 +938,7 @@ Define("read-bytevector", ReadBytevectorPrimitive)(long_t argc, FObject argv[])
         ptr = b;
     else
     {
-        ptr = (FByte *) malloc(bvl);
+        ptr = (FByte *) MALLOC(bvl);
         if (ptr == 0)
             RaiseExceptionC(Restriction, "read-bytevector!", "insufficient memory",
                     List(argv[0]));
@@ -992,7 +993,7 @@ Define("read-bytevector!", ReadBytevectorModifyPrimitive)(long_t argc, FObject a
         ptr = b;
     else
     {
-        ptr = (FByte *) malloc(end - strt);
+        ptr = (FByte *) MALLOC(end - strt);
         if (ptr == 0)
             RaiseExceptionC(Restriction, "read-bytevector", "insufficient memory",
                     List(MakeFixnum(end - strt)));

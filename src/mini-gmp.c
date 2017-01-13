@@ -44,6 +44,7 @@ along with the GNU MP Library.  If not, see http://www.gnu.org/licenses/.  */
 #include <string.h>
 
 #include "mini-gmp.h"
+#include "more-is-not-better.hpp"
 
 
 /* Macros */
@@ -247,7 +248,7 @@ gmp_default_alloc (size_t size)
 
   assert (size > 0);
 
-  p = malloc (size);
+  p = MALLOC (size);
   if (!p)
     gmp_die("gmp_default_alloc: Virtual memory exhausted.");
 
