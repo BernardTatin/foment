@@ -17,7 +17,7 @@ endif
 ifeq ($(compiler),gnu)
 WARNS = -Wall
 FDEBUG = -ggdb
-FOPTIM = -O2
+FOPTIM = -O3
 CCDEBUG = $(WARNS) $(FDEBUG) $(DEFINES)
 CCRELEASE = $(WARNS) $(DEFINES) $(FOPTIM)
 CCPROFILE = -pg $(CCRELEASE)
@@ -49,9 +49,9 @@ endif
 ifeq ($(compiler),gnu)
 CC = gcc
 CXX = g++
-CFLAGS +=
-CXXFLAGS +=
-LDFLAGS +=
+CFLAGS += -m64 -std=c11
+CXXFLAGS += -m64 -std=c++11
+LDFLAGS += -m64
 else ifeq ($(compiler),intel)
 CC = icc
 CXX = icpc
@@ -89,7 +89,7 @@ else
 endif
 
 
-clean: debug release profile
+clean: 
 	-rm debug/*
 	-rm release/*
 	-rm profile/*
