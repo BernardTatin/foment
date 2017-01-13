@@ -52,7 +52,7 @@ Future:
     #<procedure #2>
     > (pp #2)
     (lambda (x) (* x n))
-    > (map #2 ’(1 2 3 4 5))
+    > (map #2 ï¿½(1 2 3 4 5))
     (2 4 6 8 10)
 
 Compiler:
@@ -287,8 +287,8 @@ typedef struct _FObjHdr
     uint16_t FlagsAndTag;
 
 private:
-    ulong_t BlockSize() {return(((ulong_t) 1) << (BlockSizeAndCount >> OBJHDR_SIZE_SHIFT));}
-    ulong_t BlockCount() {return(BlockSizeAndCount & OBJHDR_COUNT_MASK);}
+    inline ulong_t BlockSize() {return(((ulong_t) 1) << (BlockSizeAndCount >> OBJHDR_SIZE_SHIFT));}
+    inline ulong_t BlockCount() {return(BlockSizeAndCount & OBJHDR_COUNT_MASK);}
 public:
     ulong_t ObjectSize();
     ulong_t TotalSize();
@@ -302,19 +302,29 @@ public:
 // Allocated size of the object in bytes, not including the ObjHdr and ObjFtr.
 inline ulong_t FObjHdr::ObjectSize()
 {
+#if 1
+	static const ulong_t sizeof_FObjHdr = sizeof(struct _FObjHdr);
+	const ulong_t all_bytes = BlockSize() * BlockCount() * sizeof_FObjHdr;
+	FAssert(all_bytes > 0);
+	return all_bytes;
+#else
     FAssert(BlockSize() * BlockCount() > 0);
 
     return(BlockSize() * BlockCount() * sizeof(struct _FObjHdr));
+#endif
 }
 
 // Number of FObjects which must be at the beginning of the object.
 inline ulong_t FObjHdr::SlotCount()
 {
+	static const ulong_t sizeof_FObject = sizeof(FObject);
+	
     if (FlagsAndTag & OBJHDR_HAS_SLOTS)
     {
-        FAssert(ObjectSize() / sizeof(FObject) >= ExtraCount);
+		const ulong_t current_count = ObjectSize() / sizeof_FObject - ExtraCount;
+        FAssert(current_count >= 0);
 
-        return(ObjectSize() / sizeof(FObject) - ExtraCount);
+        return current_count;
     }
 
     return(0);

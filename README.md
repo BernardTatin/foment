@@ -11,6 +11,9 @@ default values :
 ```
 Sun compiler is a _work in progress_...
 
+## experience
+This fork became a field of experimentation.
+
 ## bugs?
 When I find (what I beleive) a bug, I try to correct it. Not sure I do the right code !
 

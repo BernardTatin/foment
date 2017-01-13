@@ -14,7 +14,15 @@
             </sourceRootList>
             <confList>
                 <confElem>
-                    <name>Default</name>
+                    <name>gccDebug</name>
+                    <type>0</type>
+                </confElem>
+                <confElem>
+                    <name>gccRelease</name>
+                    <type>0</type>
+                </confElem>
+                <confElem>
+                    <name>iccRelease</name>
                     <type>0</type>
                 </confElem>
             </confList>

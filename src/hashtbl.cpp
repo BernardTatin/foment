@@ -1127,7 +1127,7 @@ static long_t SpecialStringLengthEqualP(FCh * s, long_t sl, FObject str)
     FAssert(CStringP(str));
 
     const char * cs = AsCString(str)->String;
-    ulong_t sdx;
+    long_t sdx;
     for (sdx = 0; sdx < sl; sdx++)
         if (cs[sdx] == 0 || s[sdx] != cs[sdx])
             return(0);
