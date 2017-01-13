@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="src">
+        <in>bignums.cpp</in>
+        <in>chars.cpp</in>
+        <in>compare.cpp</in>
+        <in>compile.cpp</in>
+        <in>execute.cpp</in>
+        <in>filesys.cpp</in>
+        <in>foment.cpp</in>
+        <in>gc.cpp</in>
+        <in>genpass.cpp</in>
+        <in>hashtbl.cpp</in>
+        <in>io.cpp</in>
+        <in>library.cpp</in>
+        <in>main.cpp</in>
+        <in>midpass.cpp</in>
+        <in>mini-gmp.c</in>
+        <in>numbers.cpp</in>
+        <in>pairs.cpp</in>
+        <in>read.cpp</in>
+        <in>strings.cpp</in>
+        <in>syncthrd.cpp</in>
+        <in>synpass.cpp</in>
+        <in>synrules.cpp</in>
+        <in>txt2cpp.cpp</in>
+        <in>unicode.cpp</in>
+        <in>vectors.cpp</in>
+        <in>write.cpp</in>
+      </df>
+      <df name="unix">
+        <df name="debug">
+          <in>base.cpp</in>
+        </df>
+      </df>
+      <df name="windows">
+        <in>genaul.cpp</in>
+        <in>genudf.cpp</in>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="src/bignums.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/chars.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/compare.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/compile.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/execute.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/filesys.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/foment.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/gc.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/genpass.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/hashtbl.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/io.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/library.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/midpass.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/mini-gmp.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="src/numbers.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/pairs.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/read.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/strings.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/syncthrd.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/synpass.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/synrules.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/txt2cpp.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/unicode.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/vectors.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/write.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="unix/debug/base.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="windows/genaul.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="windows/genudf.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
