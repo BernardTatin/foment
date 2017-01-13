@@ -1,4 +1,6 @@
 # about this fork
+
+## make
 The only file which is modified is the _unix/makefile_. Usage is :
 
 ```bash
@@ -7,9 +9,10 @@ default values :
   compiler: gnu
   debug   : yes
 ```
-Sun compiler is a work in progress.
+Sun compiler is a _work in progress_...
 
-Without debug (option _debug=no_), Intel compiler is really faster than _gcc_.
+## bugs?
+When I find (what I beleive) a bug, I try to correct it. Not sure I do the right code !
 
 # original README
 [Foment](https://github.com/leftmike/foment/wiki/Foment) is an implementation of Scheme.
