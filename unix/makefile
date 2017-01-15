@@ -32,6 +32,12 @@ CCDEBUG = $(WARNS) $(FDEBUG) $(DEFINES)
 CCRELEASE = $(WARNS) $(DEFINES) $(FOPTIM)
 CCPROFILE = -pg $(CCRELEASE)
 else ifeq ($(compiler),sun)
+WARNS = -Wall
+FDEBUG = -g3
+FOPTIM = -fast
+CCDEBUG = $(WARNS) $(FDEBUG) $(DEFINES)
+CCRELEASE = $(WARNS) $(DEFINES) $(FOPTIM)
+CCPROFILE = -pg $(CCRELEASE)
 endif
 
 
@@ -63,10 +69,10 @@ CXXFLAGS += -m64 -std=c++11
 LDFLAGS += -m64
 else ifeq ($(compiler),sun)
 CC = cc
-CXX = cc
-CFLAGS += -m64
+CXX = CC
+CFLAGS += -m64 -xCC
 CXXFLAGS += -m64
-LDFLAGS += -m64
+LDFLAGS += -m64 -L/lib -L/usr/lib
 endif
 
 help:
@@ -146,7 +152,7 @@ debug/foment: debug/foment.o debug/gc.o debug/syncthrd.o debug/compile.o debug/i
 		debug/library.o debug/execute.o debug/numbers.o	debug/mini-gmp.o debug/write.o\
 		debug/read.o debug/filesys.o debug/compare.o debug/main.o debug/hashtbl.o\
 		debug/bignums.o debug/base.o
-	$(CXX) $(LDFLAGS) -o debug/foment $^ -lpthread
+	$(CXX) $(LDFLAGS) -o debug/foment $^ -lpthread -lm
 
 release/foment: release/foment.o release/gc.o release/syncthrd.o release/compile.o release/io.o\
 		release/synrules.o release/synpass.o release/midpass.o release/genpass.o\
@@ -154,7 +160,7 @@ release/foment: release/foment.o release/gc.o release/syncthrd.o release/compile
 		release/vectors.o release/library.o release/execute.o release/numbers.o\
 		release/mini-gmp.o release/write.o release/read.o release/filesys.o\
 		release/compare.o release/main.o release/hashtbl.o release/bignums.o release/base.o
-	$(CXX) $(LDFLAGS) -o release/foment $^ -lpthread
+	$(CXX) $(LDFLAGS) -o release/foment $^ -lpthread -lm
 
 profile/foment: profile/foment.o profile/gc.o profile/syncthrd.o profile/compile.o profile/io.o\
 		profile/synrules.o profile/synpass.o profile/midpass.o profile/genpass.o\
@@ -162,7 +168,7 @@ profile/foment: profile/foment.o profile/gc.o profile/syncthrd.o profile/compile
 		profile/vectors.o profile/library.o profile/execute.o profile/numbers.o\
 		profile/mini-gmp.o profile/write.o profile/read.o profile/filesys.o\
 		profile/compare.o profile/main.o profile/hashtbl.o profile/bignums.o profile/base.o
-	$(CXX) $(LDFLAGS) -pg -o profile/foment $^ -lpthread
+	$(CXX) $(LDFLAGS) -pg -o profile/foment $^ -lpthread -lm
 
 debug/foment.o: ../src/foment.cpp ../src/foment.hpp ../src/syncthrd.hpp ../src/unicode.hpp
 debug/gc.o: ../src/gc.cpp ../src/foment.hpp ../src/syncthrd.hpp ../src/io.hpp

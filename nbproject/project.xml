@@ -25,6 +25,10 @@
                     <name>iccRelease</name>
                     <type>0</type>
                 </confElem>
+                <confElem>
+                    <name>sunRelease</name>
+                    <type>0</type>
+                </confElem>
             </confList>
             <formatting>
                 <project-formatting-style>false</project-formatting-style>
